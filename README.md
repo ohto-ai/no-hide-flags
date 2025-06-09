@@ -14,6 +14,16 @@ Support Minecraft 1.21+ | [Release](https://github.com/ohto-ai/no-hide-flags/rel
 This Fabric mod reveals hidden **enchantments** and **attribute modifiers** in item tooltips.  
 Even if `show_in_tooltip = false`, the mod adds a tooltip entry to notify the player.
 
+
+
+Without mod  
+
+![image](https://media.forgecdn.net/attachments/1283440/changelog/changelog_175af99b-9127-495f-8f62-bf6f876544ee.png)
+
+With mod  
+
+![image](https://media.forgecdn.net/attachments/1283440/changelog/changelog_6805f29d-2473-4725-9f30-46b514475e6b.png)
+
 ---
 
 ## ✨ 功能 | Features
