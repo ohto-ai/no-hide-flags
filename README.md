@@ -1,5 +1,7 @@
 # 📦 no-hide-flags (Fabric Mod)
 
+Support Minecraft 1.21+ | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
+
 **显示物品中被隐藏的附魔和属性信息 / Reveal Hidden Enchantments and Attributes in Tooltips**
 
 ---
