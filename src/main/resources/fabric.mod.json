@@ -1,0 +1,37 @@
+{
+	"schemaVersion": 1,
+	"id": "no-hide-flags",
+	"version": "${version}",
+	"name": "No Hide Flags",
+	"description": "Show all NBT in the tooltip.",
+	"authors": [
+		"Ohto-Ai"
+	],
+	"contact": {
+		"homepage": "https://ohtoai.top/",
+		"sources": "https://github.com/Ohto-Ai"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/no-hide-flags/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"indi.ohtoai.tool.no_hide_flags.NoHideFlagsClient"
+		]
+	},
+	"mixins": [
+		{
+			"config": "no-hide-flags.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}

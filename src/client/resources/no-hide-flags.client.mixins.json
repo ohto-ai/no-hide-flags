@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "indi.ohtoai.tool.no_hide_flags.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"client": [
+		"ItemEnchantmentsComponentAccessor",
+		"AttributeModifiersComponentAccessor",
+		"AttributeModifiersComponentMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
