@@ -37,7 +37,7 @@ public class NoHideFlagsClient implements ClientModInitializer {
             if (enchantmentsComponent != null
                 && !enchantmentsComponent.isEmpty()
                 && !((ItemEnchantmentsComponentAccessor) enchantmentsComponent).isShowInTooltip()) {
-                lines.add(Text.literal("Hide Enchantments")
+                lines.add(Text.translatable("tooltip.no_hide_flags.hide_enchantments")
                     .formatted(Formatting.GRAY, Formatting.ITALIC));
                 enchantmentsComponent.getEnchantments().forEach(enchantment -> {
                     lines.add(Enchantment.getName(enchantment,
