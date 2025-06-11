@@ -30,7 +30,7 @@ jobs:
         id: properties
         run: | # From christian-draeger/read-properties, using the action makes it extremely messy until christian-draeger/read-properties#2
           path='./gradle.properties'
-          for property in mod_version minecraft_version release-curse-versions release-extra-branch release-extra-branch-name release-extra-curse-version
+          for property in mod_version minecraft_version
           do
             result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
             echo "$property: $result"
