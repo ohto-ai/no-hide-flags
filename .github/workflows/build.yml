@@ -45,4 +45,4 @@ jobs:
         with:
           files: ./release-artifacts/*
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.MOD_RELEASE_GH_PAT }}
