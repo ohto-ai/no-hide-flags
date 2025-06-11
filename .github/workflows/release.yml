@@ -54,8 +54,6 @@ jobs:
             }
   build:
     runs-on: ubuntu-latest
-    outputs:
-      release-type: ${{ steps.type.outputs.release-type }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
