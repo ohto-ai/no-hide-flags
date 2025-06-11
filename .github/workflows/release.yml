@@ -91,7 +91,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.MOD_RELEASE_GH_PAT }}
 
   publish:
-    needs: build
+    needs: [build,Get-Properties]
     runs-on: ubuntu-latest
     steps:
       - name: Download artifact from previous job
