@@ -85,10 +85,17 @@ jobs:
         with:
           name: Artifacts
           path: ./release-artifacts
+      - name: Find correct JAR
+        id: findjar
+        run: |
+          output="$(find release-artifacts/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "jarname: $output"
+          echo "jarname=$output" >> $GITHUB_OUTPUT
+          echo "jarpath=release-artifacts/$output" >> $GITHUB_OUTPUT
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./release-artifacts/*
+          files: ${{ steps.findjar.outputs.jarpath }}
         env:
           GITHUB_TOKEN: ${{ secrets.MOD_RELEASE_GH_PAT }}
 
@@ -104,14 +111,14 @@ jobs:
       - name: Find correct JAR
         id: findjar
         run: |
-          ls release-artifacts
           output="$(find release-artifacts/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
           echo "jarname: $output"
-          echo "jarname=$output" >> $GITHUB_OUTPUT}}
+          echo "jarname=$output" >> $GITHUB_OUTPUT
+          echo "jarpath=release-artifacts/$output" >> $GITHUB_OUTPUT
       - name: "Upload to CurseForge"
         uses: itsmeow/curseforge-upload@v3
         with:
-          file_path: release-artifacts/${{ steps.findjar.outputs.jarname }}
+          file_path: ${{ steps.findjar.outputs.jarpath }}
           game_endpoint: "minecraft"
           relations: "fabric-api:requiredDependency"
           game_versions: "${{ needs.Get-Properties.outputs.curse-versions }},Java 21,Fabric"
