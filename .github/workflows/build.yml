@@ -7,8 +7,53 @@ name: build
 on: [pull_request, push]
 
 jobs:
+  Get-Properties:
+    runs-on: ubuntu-latest
+    outputs:
+      release-type: ${{ steps.type.outputs.release-type }}
+      mod-version: ${{ steps.properties.outputs.mod_version }}
+      minecraft-version: ${{ steps.properties.outputs.minecraft_version }}
+    steps:
+      - name: Checkout the sources
+        uses: actions/checkout@v4
+      - name: Determine release type
+        id: type
+        run: |
+          if ${{ github.event.release.prerelease }}; then
+            echo "release-type=beta" >> $GITHUB_OUTPUT
+          else
+            echo "release-type=release" >> $GITHUB_OUTPUT
+          fi
+      - name: Read relevant fields from gradle.properties
+        id: properties
+        run: | # From christian-draeger/read-properties, using the action makes it extremely messy until christian-draeger/read-properties#2
+          path='./gradle.properties'
+          for property in mod_version minecraft_version release-curse-versions release-extra-branch release-extra-branch-name release-extra-curse-version
+          do
+            result=$(sed -n "/^[[:space:]]*$property[[:space:]]*=[[:space:]]*/s/^[[:space:]]*$property[[:space:]]*=[[:space:]]*//p" "$path")
+            echo "$property: $result"
+            echo "$property=$result" >> $GITHUB_OUTPUT
+          done
+      - uses: actions/github-script@v7
+        env:
+          READ_VERSION: ${{ steps.properties.outputs.mod_version }}
+        with:
+          script: |
+            const { READ_VERSION } = process.env;
+            console.log('Read version is: ' + READ_VERSION);
+            let releases = (await github.rest.repos.listReleases({
+              owner: context.repo.owner,
+              repo: context.repo.repo
+            })).data;
+            console.log('Previous release was: ' + releases[1].name);
+            for (let release of releases.slice(1)) {
+              if (release.name.includes(READ_VERSION))
+                core.setFailed('Version number is the same as a previous release!')
+            }
   build:
     runs-on: ubuntu-24.04
+    outputs:
+      release-type: ${{ steps.type.outputs.release-type }}
     steps:
       - name: checkout repository
         uses: actions/checkout@v4
@@ -39,7 +84,6 @@ jobs:
         with:
           name: Artifacts
           path: ./release-artifacts
-
       - name: Upload artifact to GitHub Release
         uses: softprops/action-gh-release@v2
         with:
@@ -57,35 +101,21 @@ jobs:
         with:
           name: Artifacts
           path: ./release-artifacts
-
-      - name: Get prerelease status
-        id: get_release_info
-        uses: octokit/request-action@v2.x
-        with:
-          route: GET /repos/${{ github.repository }}/releases/tags/${{ github.ref_name }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.MOD_RELEASE_GH_PAT }}
-
-      - name: Set release type
-        id: set_release_type
+      - name: Find correct JAR
+        id: findjar
         run: |
-          echo "release_type=$(jq -r '.data.prerelease | if . then "alpha" else "release" end' <<< '${{ steps.get_release_info.outputs.data }}')" >> $GITHUB_OUTPUT
-
-      - name: Filter out source jars
-        id: filter_files
-        run: |
-          mkdir filtered-artifacts
-          find ./release-artifacts -type f -name '*.jar' ! -name '*-sources.jar' -exec cp {} filtered-artifacts/ \;
-
+          output="$(find release-artifacts/ ! -name "*-dev.jar" ! -name "*-sources.jar" -type f -printf "%f\n")"
+          echo "jarname=$output" >> $GITHUB_OUTPUT}}
       - name: "Upload to CurseForge"
         uses: itsmeow/curseforge-upload@v3
         with:
-          file_path: "filtered-artifacts/*"
+          file_path: release-artifacts/${{ steps.findjar.outputs.jarname }}
           game_endpoint: "minecraft"
           relations: "fabric-api:requiredDependency"
-          game_versions: "Minecraft 1.21:1.21.1:1.21.2:1.21.3:1.21.4,Java 21,Fabric"
-          project_id: "1283440"
-          release_type: ${{ steps.set_release_type.outputs.release_type }}
+          game_versions: "${{ needs.Get-Properties.outputs.minecraft-version }},Java 21,Fabric"
+          project_id: 1283440
           token: "${{ secrets.CF_API_TOKEN }}"
-
-
+          changelog_type: markdown
+          changelog: ${{ github.event.release.body }}
+          display_name: NoHideFlags v${{ needs.Get-Properties.outputs.mod-version }} for ${{ needs.Get-Properties.outputs.minecraft-version }}
+          release_type: ${{ needs.Get-Properties.outputs.release-type }}
