@@ -1,5 +1,8 @@
 # No Hide Flags
 
+[![Development Builds](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml/badge.svg)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml)
+[![Publish Release](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml)
+
 Support Minecraft 1.21+ | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
 
 **显示物品中被隐藏的附魔和属性信息 / Reveal Hidden Enchantments and Attributes in Tooltips**
@@ -74,4 +77,4 @@ The output JAR can be found in `build/libs/no-hide-flags-*.jar` after building.
 ## 📄 许可证 | License
 
 MIT License  
-See [LICENSE](LICENSE) for details.
+See [LICENSE](https://github.com/ohto-ai/no-hide-flags/blob/master/LICENSE) for details.
