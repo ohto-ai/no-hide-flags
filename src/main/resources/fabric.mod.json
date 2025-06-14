@@ -3,15 +3,17 @@
 	"id": "no-hide-flags",
 	"version": "${version}",
 	"name": "No Hide Flags",
-	"description": "Show all NBT in the tooltip.",
+	"description": "Reveal Hidden Enchantments and Attributes in Tooltips.",
 	"authors": [
 		"Ohto-Ai"
 	],
 	"contact": {
 		"homepage": "https://ohtoai.top/",
-		"sources": "https://github.com/ohto-ai/no-hide-flags"
+		"sources": "https://github.com/ohto-ai/no-hide-flags",
+		"email": "ohtoai.choo@gmail.com",
+		"issues": "https://github.com/ohto-ai/no-hide-flags/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/no-hide-flags/icon.png",
 	"environment": "*",
 	"entrypoints": {
