@@ -5,7 +5,9 @@
 	"client": [
 		"ItemEnchantmentsComponentAccessor",
 		"AttributeModifiersComponentAccessor",
-		"AttributeModifiersComponentMixin"
+		"AttributeModifiersComponentMixin",
+		"UnbreakableComponentAccessor",
+		"UnbreakableComponentMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
