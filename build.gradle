@@ -29,6 +29,16 @@ loom {
 
 }
 
+// AttributeModifiersComponent.Display was added in 1.21.6, so the mixin using it
+// cannot be compiled when targeting 1.21.5.
+def mcVersionParts = project.minecraft_version.tokenize('.').collect { it.toInteger() }
+def mcPatch = mcVersionParts.size() > 2 ? mcVersionParts[2] : 0
+def hasAttributeDisplay = mcVersionParts[0] > 1 ||
+	(mcVersionParts[0] == 1 && (mcVersionParts[1] > 21 || (mcVersionParts[1] == 21 && mcPatch >= 6)))
+if (!hasAttributeDisplay) {
+	sourceSets.client.java.exclude '**/ItemStackAttributeModifiersMixin.java'
+}
+
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"

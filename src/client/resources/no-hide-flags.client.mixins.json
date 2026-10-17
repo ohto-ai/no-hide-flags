@@ -1,15 +1,12 @@
 {
-	"required": true,
-	"package": "indi.ohtoai.tool.no_hide_flags.mixin.client",
-	"compatibilityLevel": "JAVA_21",
-	"client": [
-		"ItemEnchantmentsComponentAccessor",
-		"AttributeModifiersComponentAccessor",
-		"AttributeModifiersComponentMixin",
-		"UnbreakableComponentAccessor",
-		"UnbreakableComponentMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	}
+    "required": true,
+    "package": "indi.ohtoai.tool.no_hide_flags.mixin.client",
+    "plugin": "indi.ohtoai.tool.no_hide_flags.mixin.client.NoHideFlagsMixinPlugin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [
+        "TooltipDisplayComponentMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
 }
