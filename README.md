@@ -3,7 +3,7 @@
 [![Development Builds](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml/badge.svg)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml)
 [![Publish Release](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml)
 
-Support Minecraft 1.21.5–1.21.8 | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
+Support Minecraft 26.2 | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
 
 **显示物品中被隐藏的附魔和属性信息 / Reveal Hidden Enchantments and Attributes in Tooltips**
 
@@ -11,7 +11,7 @@ Support Minecraft 1.21.5–1.21.8 | [Release](https://github.com/ohto-ai/no-hide
 
 ## 📝 简介 | Introduction
 
-`No Hide Flags` is a Minecraft mod for the Fabric platform. It reveals all hidden enchantments and attribute modifiers in item tooltips, allowing players to view complete item details. Even if `show_in_tooltip = false`, the mod supplements tooltip information for the player. Supports Minecraft 1.21.5–1.21.8.
+`No Hide Flags` is a Minecraft mod for the Fabric platform. It reveals all hidden enchantments and attribute modifiers in item tooltips, allowing players to view complete item details. Even if `show_in_tooltip = false`, the mod supplements tooltip information for the player. Supports Minecraft 26.2.
 
 ---
 
@@ -67,7 +67,8 @@ The output JAR can be found in `build/libs/no-hide-flags-*.jar` after building.
 
 ## 🔧 依赖 | Dependencies
 
-- Minecraft 1.21.5–1.21.8
+- Minecraft 26.2
+- Java 25
 - Fabric Loader
 - Fabric API
 - Mixin (configured via Loom)
