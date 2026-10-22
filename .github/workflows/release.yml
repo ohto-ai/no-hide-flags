@@ -128,7 +128,7 @@ jobs:
           file_path: ${{ steps.findjar.outputs.jarpath }}
           game_endpoint: "minecraft"
           relations: "fabric-api:requiredDependency"
-          game_versions: "${{ needs.Get-Properties.outputs.curse-versions }},Java 21,Fabric,Client"
+          game_versions: "${{ needs.Get-Properties.outputs.curse-versions }},Java 25,Fabric,Client"
           project_id: 1283440
           token: "${{ secrets.CF_API_TOKEN }}"
           changelog_type: markdown
