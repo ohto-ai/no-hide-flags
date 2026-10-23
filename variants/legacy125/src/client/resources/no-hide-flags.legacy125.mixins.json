@@ -1,0 +1,10 @@
+{
+    "required": true,
+    "package": "indi.ohtoai.tool.no_hide_flags.legacy125.mixin.client",
+    "plugin": "indi.ohtoai.tool.no_hide_flags.legacy125.mixin.client.Legacy125MixinPlugin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

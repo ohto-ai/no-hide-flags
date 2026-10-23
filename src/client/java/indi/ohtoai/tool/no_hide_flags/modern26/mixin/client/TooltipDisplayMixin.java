@@ -1,4 +1,4 @@
-package indi.ohtoai.tool.no_hide_flags.mixin.client;
+package indi.ohtoai.tool.no_hide_flags.modern26.mixin.client;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.component.DataComponentType;

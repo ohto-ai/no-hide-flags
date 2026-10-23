@@ -1,0 +1,26 @@
+{
+    "schemaVersion": 1,
+    "id": "no-hide-flags-legacy125",
+    "version": "${version}",
+    "name": "No Hide Flags (legacy125 variant)",
+    "description": "Dev build of the 1.21.5-1.21.8 variant; merged into the fat jar by the root build.",
+    "license": "MIT",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "indi.ohtoai.tool.no_hide_flags.legacy125.NoHideFlagsClient"
+        ]
+    },
+    "mixins": [
+        {
+            "config": "no-hide-flags.legacy125.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.10",
+        "minecraft": ">=1.21.5 <1.21.9",
+        "java": ">=21",
+        "fabric-api": "*"
+    }
+}

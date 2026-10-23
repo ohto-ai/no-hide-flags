@@ -1,0 +1,10 @@
+{
+    "required": true,
+    "package": "indi.ohtoai.tool.no_hide_flags.modern26.mixin.client",
+    "plugin": "indi.ohtoai.tool.no_hide_flags.modern26.mixin.client.Modern26MixinPlugin",
+    "compatibilityLevel": "JAVA_21",
+    "client": [],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

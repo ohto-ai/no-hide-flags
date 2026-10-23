@@ -3,7 +3,7 @@
 [![Development Builds](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml/badge.svg)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/build.yml)
 [![Publish Release](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/ohto-ai/no-hide-flags/actions/workflows/release.yml)
 
-Support Minecraft 26.2 | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
+Support Minecraft 1.21 – 26.2 (single jar) | [Release](https://github.com/ohto-ai/no-hide-flags/releases)
 
 **显示物品中被隐藏的附魔和属性信息 / Reveal Hidden Enchantments and Attributes in Tooltips**
 
@@ -11,7 +11,7 @@ Support Minecraft 26.2 | [Release](https://github.com/ohto-ai/no-hide-flags/rele
 
 ## 📝 简介 | Introduction
 
-`No Hide Flags` is a Minecraft mod for the Fabric platform. It reveals all hidden enchantments and attribute modifiers in item tooltips, allowing players to view complete item details. Even if `show_in_tooltip = false`, the mod supplements tooltip information for the player. Supports Minecraft 26.2.
+`No Hide Flags` is a Minecraft mod for the Fabric platform. It reveals all hidden enchantments and attribute modifiers in item tooltips, allowing players to view complete item details. Even if `show_in_tooltip = false`, the mod supplements tooltip information for the player. A single jar supports Minecraft 1.21 – 1.21.8 and 26.2.
 
 ---
 
@@ -55,11 +55,16 @@ With mod
 
 ## 🛠️ 构建 | Build
 
-This project uses Gradle for building. **JDK 25+ is required** — Loom 1.18 and the mod bytecode both target Java 25, same as Minecraft 26.2 itself. If your default `JAVA_HOME` points to an older JDK, point it at a JDK 25 installation first:
+The release artifact is a single fat jar covering Minecraft 1.21 – 1.21.8 and 26.2. It is assembled from three variant builds:
+
+- `variants/legacy121` — 1.21–1.21.4, Yarn/intermediary pipeline, **JDK 21** (Loom 1.10)
+- `variants/legacy125` — 1.21.5–1.21.8, Yarn/intermediary pipeline, **JDK 21** (Loom 1.10)
+- root — 26.2, unobfuscated Mojang names, **JDK 25** (Loom 1.18), merges the variants into the fat jar
+
+Run everything with one command (override install paths via `NHF_JDK21` / `NHF_JDK25`):
 
 ```bash
-export JAVA_HOME=/path/to/jdk-25   # Git Bash on Windows: export JAVA_HOME="C:/Users/<you>/.jdks/jdk-25"
-./gradlew build
+./build-all.sh        # Windows: build-all.cmd
 ```
 
 The output JAR can be found in `build/libs/no-hide-flags-*.jar` after building.
@@ -68,8 +73,8 @@ The output JAR can be found in `build/libs/no-hide-flags-*.jar` after building.
 
 ## 🔧 依赖 | Dependencies
 
-- Minecraft 26.2
-- Java 25
+- Minecraft 1.21 – 1.21.8, 26.2
+- Java 21+ (Minecraft 26.2 itself requires a Java 25 runtime)
 - Fabric Loader
 - Fabric API
 - Mixin (configured via Loom)

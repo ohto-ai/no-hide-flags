@@ -1,4 +1,4 @@
-package indi.ohtoai.tool.no_hide_flags;
+package indi.ohtoai.tool.no_hide_flags.modern26;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;

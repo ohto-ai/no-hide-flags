@@ -54,7 +54,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
+	it.options.release = 21
 }
 
 java {
@@ -63,12 +63,43 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
+
+// Fat-jar assembly. The two legacy variants are separate Gradle builds
+// (Loom 1.10 cannot coexist with Loom 1.18 in one build); their remapped,
+// intermediary-named outputs are merged here together with the Mojang-named
+// modern26 classes. Build them first via build-all.cmd / build-all.sh.
+def legacyVariantJars = [
+	'variants/legacy121/build/libs/no-hide-flags-legacy121-1.0.0.jar',
+	'variants/legacy125/build/libs/no-hide-flags-legacy125-1.0.0.jar'
+]
 
 jar {
 	inputs.property "archivesName", project.base.archivesName
+
+	// The dev fabric.mod.json only lists the modern26 config (the legacy
+	// configs only exist in the fat jar); swap in the fat definition.
+	exclude 'fabric.mod.json'
+	from('fat') {
+		include 'fabric.mod.json.template'
+		rename { 'fabric.mod.json' }
+		expand "version": project.version
+	}
+	legacyVariantJars.each { path ->
+		from(zipTree(file(path))) {
+			include 'indi/**', 'no-hide-flags.legacy*.mixins.json', '*-refmap.json'
+		}
+	}
+	doFirst {
+		legacyVariantJars.each { path ->
+			if (!file(path).exists()) {
+				throw new GradleException(
+					"${path} is missing - build the variant projects first (build-all.cmd / build-all.sh)")
+			}
+		}
+	}
 
 	from("LICENSE") {
 		rename { "${it}_${inputs.properties.archivesName}"}

@@ -9,16 +9,21 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 25
+    - name: Set up JDK 21 (legacy variants)
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: 21
+    - name: Set up JDK 25 (root build)
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
         java-version: 25
         cache: 'gradle'
     - name: Grant execute permission to gradlew
-      run: chmod +x gradlew
-    - name: Build with Gradle
-      run: ./gradlew build
+      run: chmod +x gradlew variants/legacy121/gradlew variants/legacy125/gradlew build-all.sh
+    - name: Build all variants and the fat jar
+      run: ./build-all.sh
     - uses: actions/upload-artifact@v4
       with:
         name: Compiled artifacts for ${{ github.sha }}

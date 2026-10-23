@@ -1,0 +1,44 @@
+{
+    "schemaVersion": 1,
+    "id": "no-hide-flags",
+    "version": "${version}",
+    "name": "No Hide Flags",
+    "description": "Reveal Hidden Enchantments and Attributes in Tooltips.",
+    "authors": [
+        "Ohto-Ai"
+    ],
+    "contact": {
+        "homepage": "https://www.curseforge.com/minecraft/mc-mods/no-hide-flags",
+        "sources": "https://github.com/ohto-ai/no-hide-flags",
+        "email": "ohtoai.choo@gmail.com",
+        "issues": "https://github.com/ohto-ai/no-hide-flags/issues"
+    },
+    "license": "MIT",
+    "icon": "assets/no-hide-flags/icon.png",
+    "environment": "client",
+    "entrypoints": {
+        "client": [
+            "indi.ohtoai.tool.no_hide_flags.NoHideFlagsDispatcher"
+        ]
+    },
+    "mixins": [
+        {
+            "config": "no-hide-flags.legacy121.mixins.json",
+            "environment": "client"
+        },
+        {
+            "config": "no-hide-flags.legacy125.mixins.json",
+            "environment": "client"
+        },
+        {
+            "config": "no-hide-flags.modern26.mixins.json",
+            "environment": "client"
+        }
+    ],
+    "depends": {
+        "fabricloader": ">=0.16.10",
+        "minecraft": [">=1.21 <1.21.9", "~26.2"],
+        "java": ">=21",
+        "fabric-api": "*"
+    }
+}
