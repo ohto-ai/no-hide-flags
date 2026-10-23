@@ -55,9 +55,10 @@ With mod
 
 ## 🛠️ 构建 | Build
 
-This project uses Gradle for building. Run:
+This project uses Gradle for building. **JDK 25+ is required** — Loom 1.18 and the mod bytecode both target Java 25, same as Minecraft 26.2 itself. If your default `JAVA_HOME` points to an older JDK, point it at a JDK 25 installation first:
 
 ```bash
+export JAVA_HOME=/path/to/jdk-25   # Git Bash on Windows: export JAVA_HOME="C:/Users/<you>/.jdks/jdk-25"
 ./gradlew build
 ```
 

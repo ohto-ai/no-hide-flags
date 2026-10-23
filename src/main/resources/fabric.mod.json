@@ -15,7 +15,7 @@
     },
     "license": "MIT",
     "icon": "assets/no-hide-flags/icon.png",
-    "environment": "*",
+    "environment": "client",
     "entrypoints": {
         "client": [
             "indi.ohtoai.tool.no_hide_flags.NoHideFlagsClient"
@@ -32,8 +32,5 @@
         "minecraft": "~26.2",
         "java": ">=25",
         "fabric-api": "*"
-    },
-    "suggests": {
-        "another-mod": "*"
     }
 }
